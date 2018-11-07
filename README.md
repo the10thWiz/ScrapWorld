@@ -4,7 +4,9 @@ The ScrapWorld Game
 This repository will hold the entirety of the ScrapWorld Unity project.
 
 You will need a github account, and some basic understanding of git
+
 Guide to github for unity: https://github.com/github-for-unity/Unity/blob/master/docs/using/quick-guide.md
+
 Github guide: https://help.github.com/
 
 To suggest changes:
