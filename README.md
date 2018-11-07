@@ -17,3 +17,10 @@ To suggest changes:
 - Open up github in your browser, and open a pull request from your branch to the branch you want to change
 
 I will review pull requests, and pull them if they introduce good changes.
+
+# Naming conventions
+
+Every file name should be lowercare, using underscores (`_`) to show different versions of the same file, and include a \_1 at the end, unless it is a second version of the same file (then the one becomes 2, etc)
+e.g.
+- robot_1.png = a png of a robot (the first one file with this name)
+- robot_rusty_2.png = a png of the same robot, but rusty (the second one file with this name)
