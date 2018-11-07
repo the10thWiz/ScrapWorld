@@ -10,10 +10,25 @@ public class PhysicsController : MonoBehaviour {
 		public Vector2 bottomLeft;
 	}
 
+	public struct CollisionInfo {
+		public bool above;
+		public bool left;
+		public bool right;
+		public bool below;
+
+		public void Reset() {
+			above = false;
+			left = false;
+			right = false;
+			below = false;
+		}
+	}
+
 	const float skin_depth = 0.015f;
 	public int horiz_rays = 3;
 	public int vert_rays = 3;
 	public LayerMask mask;
+	public CollisionInfo collisions;
 
 	float horizSpacing;
 	float vertSpacing;
@@ -70,8 +85,13 @@ public class PhysicsController : MonoBehaviour {
 			if (hit) {
 				vel.y = (hit.distance - skin_depth) * dirY;
 				length = hit.distance;
+				collisions.above = dirY == 1;
+				collisions.below = dirY == -1;
+				
+				Debug.DrawRay(origin, Vector2.up * dirY * hit.distance, Color.red);
+			}else {
+				Debug.DrawRay(origin, Vector2.up * dirY * 2, Color.red);
 			}
-			Debug.DrawRay(origin, Vector2.up * dirY * length, Color.red);
 		}
 	}
 
@@ -85,12 +105,17 @@ public class PhysicsController : MonoBehaviour {
 			if (hit) {
 				vel.x = (hit.distance - skin_depth) * dirX;
 				length = hit.distance;
+				collisions.right = dirX == 1;
+				collisions.left = dirX == -1;
+				Debug.DrawRay(origin, Vector2.right * dirX * hit.distance, Color.red);
+			}else {
+				Debug.DrawRay(origin, Vector2.right * dirX * 2, Color.red);
 			}
-			Debug.DrawRay(origin, Vector2.right * dirX * length, Color.red);
 		}
 	}
 
 	public void Move (Vector3 vel) {
+		collisions.Reset();
 		HorizontalCollisions (ref vel);
 		VerticalCollisions (ref vel);
 		transform.Translate (vel);
