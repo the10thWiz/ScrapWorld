@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 56992135}
   - component: {fileID: 56992134}
   - component: {fileID: 56992133}
+  - component: {fileID: 56992136}
   m_Layer: 9
   m_Name: ground (2)
   m_TagString: Untagged
@@ -207,13 +208,30 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 56992132}
-  m_LocalRotation: {x: 0.0015891591, y: 0.0025473698, z: -0.12540673, w: 0.9921009}
-  m_LocalPosition: {x: -3.02, y: -5.43, z: 0.01}
-  m_LocalScale: {x: 9.86718, y: 1.2266746, z: 1}
+  m_LocalRotation: {x: 0.0018936563, y: -0.0016066316, z: -0.000011866992, w: 0.9999969}
+  m_LocalPosition: {x: -3.76, y: -3.9, z: -0.01}
+  m_LocalScale: {x: 1.8897028, y: 0.37375242, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0.21700001, y: 0.26700002, z: -14.408001}
+  m_LocalEulerAnglesHint: {x: 0.21700001, y: -0.18400002, z: -0.002}
+--- !u!114 &56992136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 56992132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23fdc7aacc659a945af531c86b73d8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin_depth: 0.015
+  horiz_rays: 3
+  vert_rays: 7
+  mask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &113961632
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,12 +438,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skin_depth: 0.015
-  maxClimbAngle: 60
   horiz_rays: 3
   vert_rays: 3
   mask:
     serializedVersion: 2
     m_Bits: 512
+  maxClimbAngle: 60
 --- !u!61 &331878596
 BoxCollider2D:
   m_ObjectHideFlags: 0
