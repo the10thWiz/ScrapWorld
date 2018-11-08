@@ -15,16 +15,23 @@ public class PhysicsController : MonoBehaviour {
 		public bool left;
 		public bool right;
 		public bool below;
+		public bool climbSlope;
+		public float slopeAngle;
+		public float pslopeAngle;
 
 		public void Reset() {
 			above = false;
 			left = false;
 			right = false;
 			below = false;
+			climbSlope = false;
+			pslopeAngle = slopeAngle;
+			slopeAngle = 0;
 		}
 	}
 
-	const float skin_depth = 0.015f;
+	public float skin_depth = 0.015f;
+	public float maxClimbAngle = 70;
 	public int horiz_rays = 3;
 	public int vert_rays = 3;
 	public LayerMask mask;
@@ -103,6 +110,11 @@ public class PhysicsController : MonoBehaviour {
 			origin += ((dirX == -1) ? Vector2.up : Vector2.down) * (horizSpacing * i + vel.y);
 			RaycastHit2D hit = Physics2D.Raycast (origin, Vector2.right * dirX, length, mask);
 			if (hit) {
+				float angle = Vector2.Angle(hit.normal, Vector2.up);
+				if(Mathf.Abs(angle) <= maxClimbAngle) {
+					ClimbSlope(ref vel, angle);
+				}
+				// Maybe only run if not climbing slope?
 				vel.x = (hit.distance - skin_depth) * dirX;
 				length = hit.distance;
 				collisions.right = dirX == 1;
@@ -112,6 +124,14 @@ public class PhysicsController : MonoBehaviour {
 				Debug.DrawRay(origin, Vector2.right * dirX * 2, Color.red);
 			}
 		}
+	}
+
+	void ClimbSlope(ref Vector3 vel, float angle) {
+		vel.y = Mathf.Max(Mathf.Sin(angle * Mathf.Deg2Rad)*Mathf.Abs(vel.x), vel.y);
+		vel.x*= Mathf.Cos(angle * Mathf.Deg2Rad);
+		collisions.below = true;
+		collisions.climbSlope = true;
+		collisions.slopeAngle = angle;
 	}
 
 	public void Move (Vector3 vel) {

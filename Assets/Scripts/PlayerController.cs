@@ -2,12 +2,14 @@
 using UnityEngine;
 
 [RequireComponent (typeof (PhysicsController))]
-public class Player : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	public float gravity = -20;
 	public float moveSpeed = 6;
 	public float jumpSpeed = 8;
+	public float acceleration = .2f;
 	Vector3 velocity;
+	float velocityXSmoothing;
 
 	PhysicsController controller;
 
@@ -24,11 +26,11 @@ public class Player : MonoBehaviour {
 
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
-		velocity.x = input.x * moveSpeed;
+		float targetX = input.x * moveSpeed;
 		if(controller.collisions.below && input.y > 0) {
 			velocity.y = input.y * jumpSpeed;
 		}
-
+		velocity.x = Mathf.SmoothDamp(velocity.x, targetX, ref velocityXSmoothing, (controller.collisions.below)?acceleration/2:acceleration);
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move (velocity * Time.deltaTime);
 	}
