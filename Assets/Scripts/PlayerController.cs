@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent (typeof (PhysicsController))]
@@ -20,17 +20,17 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(controller.collisions.above || controller.collisions.below) {
+		if (controller.collisions.above || controller.collisions.below) {
 			velocity.y = 0;
 		}
 
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
 		float targetX = input.x * moveSpeed;
-		if(controller.collisions.below && input.y > 0) {
+		if (controller.collisions.below && input.y > 0) {
 			velocity.y = input.y * jumpSpeed;
 		}
-		velocity.x = Mathf.SmoothDamp(velocity.x, targetX, ref velocityXSmoothing, (controller.collisions.below)?acceleration/2:acceleration);
+		velocity.x = Mathf.SmoothDamp (velocity.x, targetX, ref velocityXSmoothing, (controller.collisions.below) ? acceleration / 2 : acceleration);
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move (velocity * Time.deltaTime);
 	}
