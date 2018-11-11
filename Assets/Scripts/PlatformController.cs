@@ -21,17 +21,19 @@ public class PlatformController : Raycaster {
 	protected Vector3 move;
 	protected List<PassengerMovement> passengers;
 	protected Dictionary<Transform, PhysicsController> passengerDict = new Dictionary<Transform, PhysicsController> ();
+	float startY;
 	// Use this for initialization
 	protected override void Start () {
 		base.Start ();
 		move = new Vector3 (0, 0.5f, 0);
+		startY = transform.position.y;
 	}
 
 	// Update is called once per frame
 	protected override void Update () {
 		base.Update ();
 		passengers = new List<PassengerMovement> ();
-		move.y = Mathf.Sin (Time.frameCount / 100) * 2;
+		move.y = startY + Mathf.Sin (Time.time) * 5 - transform.position.y;
 		move.x = 0; //Mathf.Sin (Time.frameCount / 100) * 2;
 		Vector3 velocity = move * Time.deltaTime;
 		calcPassengersVel (velocity);
