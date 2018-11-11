@@ -1,15 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Cutscene : MonoBehaviour {
-	
+
 	public GameObject CutsceneCam; //Set the cutscene cam object
 	public GameObject NormalCam; //Set the normal cam object
-	public bool InCutscene=false; //Set if we are in cutscene
+	public bool InCutscene = false; //Set if we are in cutscene
 	public int Timer; //Timer adds 1 per frame
 	public int Count; //What cutscene is played
-	
+
 	/*
 	
 	If you want to use cutscene system write
@@ -31,29 +31,29 @@ public class Cutscene : MonoBehaviour {
 	do "X=Cutscene.InCutscene;" (X must be = bool)
 	
 	*/
-	
+
 	void Start () {
 		//Chek if we start on cutscene
 		if (InCutscene) {
-			Enable(); 
+			Enable ();
 		} else {
-			Disable();
+			Disable ();
 		}
 	}
-	
+
 	void Update () {
 		Timer++; //Add one to the timer
 	}
-	
+
 	public void Enable () { //Enable the cutscene
-		CutsceneCam.SetActive(true); //Enable Cutscene cam
-		NormalCam.SetActive(false); //Disable Noraml cam
-		InCutscene=true; //Set the in cutscene status to true
-		Timer=0; //Reset the timer
+		CutsceneCam.SetActive (true); //Enable Cutscene cam
+		NormalCam.SetActive (false); //Disable Noraml cam
+		InCutscene = true; //Set the in cutscene status to true
+		Timer = 0; //Reset the timer
 	}
-	public void Disable (){ //Disable the cutscene
-		CutsceneCam.SetActive(false); //Disable Cutscene cam
-		NormalCam.SetActive(true); //Enable Noraml cam
-		InCutscene=false; //Set the in cutscene status to false
+	public void Disable () { //Disable the cutscene
+		CutsceneCam.SetActive (false); //Disable Cutscene cam
+		NormalCam.SetActive (true); //Enable Noraml cam
+		InCutscene = false; //Set the in cutscene status to false
 	}
 }

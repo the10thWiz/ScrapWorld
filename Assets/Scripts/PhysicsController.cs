@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,7 +42,7 @@ public class PhysicsController : Raycaster {
 			Vector2 origin = (dirX == -1) ? origins.bottomLeft : origins.topRight;
 			origin += ((dirX == -1) ? Vector2.up : Vector2.down) * (horizSpacing * i + vel.y);
 			RaycastHit2D hit = Physics2D.Raycast (origin, Vector2.right * dirX, length, mask);
-			if(hit.distance == 0) {
+			if (hit.distance == 0) {
 				continue;
 			}
 			if (hit) {

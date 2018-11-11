@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class Raycaster : MonoBehaviour {
 		public float slopeAngle;
 		public float pslopeAngle;
 
-		public void Reset() {
+		public void Reset () {
 			above = false;
 			left = false;
 			right = false;
@@ -28,12 +28,12 @@ public class Raycaster : MonoBehaviour {
 			slopeAngle = 0;
 		}
 	}
-	
+
 	public float skin_depth = 0.015f;
 	public int horiz_rays = 3;
 	public int vert_rays = 3;
 	public LayerMask mask;
-	
+
 	protected float horizSpacing;
 	protected float vertSpacing;
 	protected BoxCollider2D boundingBox;
@@ -42,7 +42,7 @@ public class Raycaster : MonoBehaviour {
 	protected virtual void Start () {
 		boundingBox = GetComponent<BoxCollider2D> ();
 	}
-	
+
 	// Update is called once per frame
 	protected virtual void Update () {
 		calcOrigins ();
@@ -55,9 +55,9 @@ public class Raycaster : MonoBehaviour {
 		// 	Debug.DrawRay (origins.topRight + Vector2.down * horizSpacing * i, Vector2.right * 2, Color.red);
 		// 	Debug.DrawRay (origins.bottomLeft + Vector2.up * horizSpacing * i, Vector2.left * 2, Color.red);
 		// }
-		
+
 	}
-	
+
 	// calculate bounding box corners
 	void calcOrigins () {
 		Bounds bounds = boundingBox.bounds;
