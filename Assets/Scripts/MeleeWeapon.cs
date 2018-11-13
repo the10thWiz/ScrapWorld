@@ -15,10 +15,12 @@ public class MeleeWeapon : Weapon {
 	}
 
 	public override void Attack(Vector3 dir) {
+		dir.Normalize();
+		Debug.Log(dir.magnitude);
+		Debug.DrawRay(boundingBox.position+position, dir * range, Color.green);
 		if(CanAttack()) {
 			Attack();
 			position.x = Mathf.Abs(position.x) * Mathf.Sign(dir.x);
-			dir.Normalize();
 			RaycastHit2D hit = Physics2D.Raycast(boundingBox.position+position, dir, range, mask);
 			if(hit) {
 				Health entity = hit.transform.GetComponent<Health>();
